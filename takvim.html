@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
+        <link rel="stylesheet" media="print" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.min.css">
+
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+        <script src="https://momentjs.com/downloads/moment.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale-all.js"></script>
+        <script
+  src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+        
+        <script>
+            $(function(){
+
+                $('#olaylar .fc-event').each(function(){
+                    $(this).data('event', {
+                        title:$(this).text()
+                    }),
+
+                    $(this).draggable({
+                        revert:true,
+                        revertDuration: 0
+                    });
+                })
+
+
+
+                $('#calendar').fullCalendar({
+                    locale: 'tr',
+                    defaultView: 'month',
+                    selectable:true,
+                    //editable:true,
+                    scrollTime:'12:00',
+                    slotDuration:'00:15',
+                    slotLabelFormat:'H',
+                    allDayText:'Saat',
+                    minTime:'00:00',
+                    maxTime:'23:00',
+                    slotLabelInterval:'01:00',
+                    droppable:true,
+                    header: {
+                        left:'prev,next today, denemeBtn',
+                        center :'title',
+                        right:'month,basicWeek,basicDay, agendaWeek,agendaDay'
+                    },
+                    footer: {
+                        left:'title',
+                        center :'',
+                        right:'prevYear,nextYear'
+                    },
+                    columnFormat: 'dddd',
+                    timeFormat:'HH',
+                    buttonText:{
+                        agendaWeek: 'saatli hafta',
+                        agendaDay: 'saatli gün'
+                    },
+                    
+                    customButtons:{
+                        denemeBtn:{
+                            text:'buton',
+                            click: function(){
+                                alert('deneme butonuna basıldı');
+                            }
+                            
+                        }
+                    },
+
+                    events: [
+                        {
+                            title: 'doğum günü',
+                            start: new Date(2022,11,14),
+                            allDay: true,
+                            backgroundColor:'red'
+                        }
+                    ],
+                    //height: 500,
+                    //contentHeight:500,
+                    aspectRatio:4,
+                    views:{
+                        month:{
+                            titleFormat:'MMMM'
+                        },
+                        basicWeek:{
+                            titleFormat:'MMM YYYY'
+                        }
+                    }
+                    
+                });
+            }) ;
+        </script>
+
+    </head>
+
+    <body>
+        <div id="olaylar">
+            <div class="fc-event">Olay1</div>
+            <div class="fc-event">Olay2</div>
+            <div class="fc-event">Olay3</div>
+        </div>
+
+
+        <div id= "calendar"></div>
+    </body>
+</html>
